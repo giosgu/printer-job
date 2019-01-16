@@ -1,17 +1,18 @@
-var nodemailer = require('nodemailer');
-var conts = require('./conts');
 
-var transporter = nodemailer.createTransport({
+import * as nodemailer from "nodemailer";
+import {Consts} from './conts';
+
+const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: conts.MAIL_FROM,
-      pass: conts.MAIL_SEC
+      user: Consts.MAIL_FROM,
+      pass: Consts.MAIL_SEC
     }
   });
   
-var mailOptions = {
-    from: conts.MAIL_FROM,
-    to: conts.MAIL_TO,
+let mailOptions = {
+    from: Consts.MAIL_FROM,
+    to: Consts.MAIL_TO,
     subject: 'Impresión del mes',
     text: 'That was easy!',
     attachments: [{   // use URL as an attachment
@@ -20,7 +21,7 @@ var mailOptions = {
     }]
   };
   
-transporter.sendMail(mailOptions, function(error, info){
+transporter.sendMail(mailOptions, function(error: any, info: { response: string; }){
     if (error) {
       console.log(error);
     } else {
